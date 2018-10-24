@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -x
+
+if [ $# -lt 2 ]
+then
+    return 
+fi
+
+languageArray=("en" "jp" "cn" "cs" "da" "de" "it" "nt" "np" "dd")
+
+cols=`sed -n '1p' $1 | awk -F "\t" '{print NF}'`
+
+#temp=`cat $3`
+
+echo ${languageArray[@]}
+:<<!
+for elem in ${languageArray[@]}
+do
+    echo $elem
+done
+!
+for i in `seq 2 ${cols}`
+    do
+    echo ${languageArray[$i]}
+    eval j=`$i-2` 
+    fileName=${languageArray[$j]}.xml
+    cat $2 > ${fileName} 
+    echo >> ${fileName} 
+    cat $1 | awk -F "\t" 'BEGIN {}; { print "\t<data name=\""$1"\" xml:space=\"preserve\">\n\t\t<value>" $'${i}' "</value>\n\t</data>"}; END {print "</root>"}' >> ${fileName} 
+    
+done
+
+set +x

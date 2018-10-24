@@ -1,0 +1,3 @@
+os_privacy_camera	japanese	english
+os_privacy_camera	カメラへのアクセスを許可しますか？	Allow access to the camera?
+os_privacy_photo	アルバムへのアクセスを許可しますか？	Allow access to the albums?
